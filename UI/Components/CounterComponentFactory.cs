@@ -5,9 +5,9 @@ namespace LiveSplit.UI.Components
 {
     public class CounterComponentFactory : IComponentFactory
     {
-        public string ComponentName => "Counter";
+        public string ComponentName => "Global Counter";
 
-        public string Description => "A labelled counter, allowing an initial value to be incremented/decremented by a specified amount.";
+        public string Description => "Modified LiveSplit.Counter tuned specifically for tracking your global count in The Legend of Zelda on NES.";
 
         public ComponentCategory Category => ComponentCategory.Other;
 
@@ -15,7 +15,7 @@ namespace LiveSplit.UI.Components
 
         public string UpdateName => ComponentName;
 
-        public string XMLURL => "http://livesplit.org/update/Components/update.LiveSplit.Counter.xml";
+        public string XMLURL => string.Empty;
 
         public string UpdateURL => "http://livesplit.org/update/";
 
