@@ -2,7 +2,7 @@
 {
     public class Counter : ICounter
     {
-        private int increment = 1;
+        protected int increment = 1;
         private int initialValue = 0;
 
         /// <summary>
@@ -17,12 +17,12 @@
             Count = initialValue;
         }
         
-        public int Count { get; private set; }
+        public int Count { get; protected set; }
 
         /// <summary>
         /// Increments this instance.
         /// </summary>
-        public bool Increment()
+        public virtual bool Increment()
         {
             if (Count == int.MaxValue)
                 return false;
@@ -43,7 +43,7 @@
         /// <summary>
         /// Decrements this instance.
         /// </summary>
-        public bool Decrement()
+        public virtual bool Decrement()
         {
             if (Count == int.MinValue)
                 return false;
@@ -72,7 +72,7 @@
         /// <summary>
         /// Sets the count.
         /// </summary>
-        public void SetCount(int value)
+        public virtual void SetCount(int value)
         {
             Count = value;
         }
