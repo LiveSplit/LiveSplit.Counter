@@ -136,20 +136,9 @@ namespace LiveSplit.UI.Components
             DrawGeneral(g, state, width, VerticalHeight, LayoutMode.Vertical);
         }
 
-        public string ComponentName
-        {
-            get { return "Counter"; }
-        }
-
-        public Control GetSettingsControl(LayoutMode mode)
-        {
-            return Settings;
-        }
-
-        public System.Xml.XmlNode GetSettings(System.Xml.XmlDocument document)
-        {
-            return Settings.GetSettings(document);
-        }
+        public string ComponentName => "Global Counter";
+        public Control GetSettingsControl(LayoutMode mode) => Settings;
+        public System.Xml.XmlNode GetSettings(System.Xml.XmlDocument document) => Settings.GetSettings(document);
 
         public void SetSettings(System.Xml.XmlNode settings)
         {
