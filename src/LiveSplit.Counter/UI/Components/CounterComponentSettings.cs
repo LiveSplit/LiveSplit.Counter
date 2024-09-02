@@ -178,7 +178,9 @@ public partial class CounterComponentSettings : UserControl
 
             // No action for special keys.
             if (x.KeyCode == Keys.ControlKey || x.KeyCode == Keys.ShiftKey || x.KeyCode == Keys.Menu)
+            {
                 return;
+            }
 
             keySetCallback(keyOrButton);
             unregisterEvents();
@@ -200,7 +202,9 @@ public partial class CounterComponentSettings : UserControl
 
             // No action for normal keys.
             if (x.KeyCode != Keys.ControlKey && x.KeyCode != Keys.ShiftKey && x.KeyCode != Keys.Menu)
+            {
                 return;
+            }
 
             keySetCallback(keyOrButton);
             unregisterEvents();
@@ -233,9 +237,13 @@ public partial class CounterComponentSettings : UserControl
 
             // May not be in the UI thread (likely).
             if (InvokeRequired)
+            {
                 Invoke(keyOrButton);
+            }
             else
+            {
                 keyOrButton();
+            }
         };
 
         txtBox.KeyDown += handlerDown;
@@ -280,14 +288,20 @@ public partial class CounterComponentSettings : UserControl
     private string FormatKey(KeyOrButton key)
     {
         if (key == null)
+        {
             return "None";
+        }
+
         string str = key.ToString();
         if (key.IsButton)
         {
             int length = str.LastIndexOf(' ');
             if (length != -1)
+            {
                 str = str.Substring(0, length);
+            }
         }
+
         return str;
     }
 

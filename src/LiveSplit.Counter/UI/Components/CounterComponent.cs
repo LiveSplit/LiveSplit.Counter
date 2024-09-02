@@ -58,8 +58,8 @@ public class CounterComponent : IComponent
     {
         // Set Background colour.
         if (Settings.BackgroundColor.A > 0
-            || Settings.BackgroundGradient != GradientType.Plain
-            && Settings.BackgroundColor2.A > 0)
+            || (Settings.BackgroundGradient != GradientType.Plain
+            && Settings.BackgroundColor2.A > 0))
         {
             var gradientBrush = new LinearGradientBrush(
                         new PointF(0, 0),
@@ -82,7 +82,7 @@ public class CounterComponent : IComponent
         VerticalHeight = 1.2f * textHeight;
         MinimumHeight = MinimumHeight;
 
-        PaddingTop = Math.Max(0, ((VerticalHeight - 0.75f * textHeight) / 2f));
+        PaddingTop = Math.Max(0, (VerticalHeight - (0.75f * textHeight)) / 2f);
         PaddingBottom = PaddingTop;
 
         // Assume most users won't count past four digits (will cause a layout resize in Horizontal Mode).
@@ -94,7 +94,7 @@ public class CounterComponent : IComponent
         CounterNameLabel.VerticalAlignment = StringAlignment.Center;
         CounterNameLabel.X = 5;
         CounterNameLabel.Y = 0;
-        CounterNameLabel.Width = (width - fourCharWidth - 5);
+        CounterNameLabel.Width = width - fourCharWidth - 5;
         CounterNameLabel.Height = height;
         CounterNameLabel.Font = CounterFont;
         CounterNameLabel.Brush = new SolidBrush(Settings.OverrideTextColor ? Settings.CounterTextColor : state.LayoutSettings.TextColor);
@@ -108,7 +108,7 @@ public class CounterComponent : IComponent
         CounterValueLabel.VerticalAlignment = StringAlignment.Center;
         CounterValueLabel.X = 5;
         CounterValueLabel.Y = 0;
-        CounterValueLabel.Width = (width - 10);
+        CounterValueLabel.Width = width - 10;
         CounterValueLabel.Height = height;
         CounterValueLabel.Font = CounterFont;
         CounterValueLabel.Brush = new SolidBrush(Settings.OverrideTextColor ? Settings.CounterValueColor : state.LayoutSettings.TextColor);
@@ -153,7 +153,9 @@ public class CounterComponent : IComponent
         try
         {
             if (Settings.Hook != null)
+            {
                 Settings.Hook.Poll();
+            }
         }
         catch { }
 
@@ -202,10 +204,14 @@ public class CounterComponent : IComponent
             || Settings.GlobalHotkeysEnabled)
         {
             if (e == Settings.IncrementKey)
+            {
                 Counter.Increment();
+            }
 
             if (e == Settings.DecrementKey)
+            {
                 Counter.Decrement();
+            }
 
             if (e == Settings.ResetKey)
             {

@@ -25,7 +25,9 @@ public class Counter : ICounter
     public bool Increment()
     {
         if (Count == int.MaxValue)
+        {
             return false;
+        }
 
         try
         {
@@ -46,7 +48,9 @@ public class Counter : ICounter
     public bool Decrement()
     {
         if (Count == int.MinValue)
+        {
             return false;
+        }
 
         try
         {
