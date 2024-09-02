@@ -36,25 +36,16 @@ public class CounterComponent : IComponent
 
     public float MinimumHeight { get; set; }
 
-    public float MinimumWidth
-    {
-        get
-        {
-            return CounterNameLabel.X + CounterValueLabel.ActualWidth;
-        }
-    }
+    public float MinimumWidth => CounterNameLabel.X + CounterValueLabel.ActualWidth;
 
     public float HorizontalWidth { get; set; }
 
-    public IDictionary<string, Action> ContextMenuControls
-    {
-        get { return null; }
-    }
+    public IDictionary<string, Action> ContextMenuControls => null;
 
     public float PaddingTop { get; set; }
-    public float PaddingLeft { get { return 7f; } }
+    public float PaddingLeft => 7f;
     public float PaddingBottom { get; set; }
-    public float PaddingRight { get { return 7f; } }
+    public float PaddingRight => 7f;
 
     protected SimpleLabel CounterNameLabel = new SimpleLabel();
     protected SimpleLabel CounterValueLabel = new SimpleLabel();
@@ -137,10 +128,7 @@ public class CounterComponent : IComponent
         DrawGeneral(g, state, width, VerticalHeight, LayoutMode.Vertical);
     }
 
-    public string ComponentName
-    {
-        get { return "Counter"; }
-    }
+    public string ComponentName => "Counter";
 
     public Control GetSettingsControl(LayoutMode mode)
     {

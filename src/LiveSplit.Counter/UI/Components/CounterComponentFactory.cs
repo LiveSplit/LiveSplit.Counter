@@ -15,7 +15,10 @@ public class CounterComponentFactory : IComponentFactory
 
     public ComponentCategory Category => ComponentCategory.Other;
 
-    public IComponent Create(LiveSplitState state) => new CounterComponent(state);
+    public IComponent Create(LiveSplitState state)
+    {
+        return new CounterComponent(state);
+    }
 
     public string UpdateName => ComponentName;
 

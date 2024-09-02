@@ -68,7 +68,7 @@ public partial class CounterComponentSettings : UserControl
     public Color CounterValueColor { get; set; }
     public bool OverrideTextColor { get; set; }
 
-    public string CounterFontString { get { return String.Format("{0} {1}", CounterFont.FontFamily.Name, CounterFont.Style); } }
+    public string CounterFontString => String.Format("{0} {1}", CounterFont.FontFamily.Name, CounterFont.Style);
     public Font CounterFont { get; set; }
     public bool OverrideCounterFont { get; set; }
 
@@ -77,8 +77,8 @@ public partial class CounterComponentSettings : UserControl
     public GradientType BackgroundGradient { get; set; }
     public String GradientString
     {
-        get { return BackgroundGradient.ToString(); }
-        set { BackgroundGradient = (GradientType)Enum.Parse(typeof(GradientType), value); }
+        get => BackgroundGradient.ToString();
+        set => BackgroundGradient = (GradientType)Enum.Parse(typeof(GradientType), value);
     }
 
     public string CounterText { get; set; }
