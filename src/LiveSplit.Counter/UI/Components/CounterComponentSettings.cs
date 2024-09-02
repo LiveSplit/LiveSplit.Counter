@@ -298,7 +298,7 @@ public partial class CounterComponentSettings : UserControl
             int length = str.LastIndexOf(' ');
             if (length != -1)
             {
-                str = str.Substring(0, length);
+                str = str[..length];
             }
         }
 
