@@ -54,7 +54,7 @@ public class CounterComponent : IComponent
 
     private LiveSplitState state;
 
-    private void DrawGeneral(Graphics g, Model.LiveSplitState state, float width, float height, LayoutMode mode)
+    private void DrawGeneral(Graphics g, LiveSplitState state, float width, float height, LayoutMode mode)
     {
         // Set Background colour.
         if (Settings.BackgroundColor.A > 0
@@ -118,12 +118,12 @@ public class CounterComponent : IComponent
         CounterValueLabel.Draw(g);
     }
 
-    public void DrawHorizontal(Graphics g, Model.LiveSplitState state, float height, Region clipRegion)
+    public void DrawHorizontal(Graphics g, LiveSplitState state, float height, Region clipRegion)
     {
         DrawGeneral(g, state, HorizontalWidth, height, LayoutMode.Horizontal);
     }
 
-    public void DrawVertical(System.Drawing.Graphics g, Model.LiveSplitState state, float width, Region clipRegion)
+    public void DrawVertical(Graphics g, LiveSplitState state, float width, Region clipRegion)
     {
         DrawGeneral(g, state, width, VerticalHeight, LayoutMode.Vertical);
     }
@@ -148,7 +148,7 @@ public class CounterComponent : IComponent
         Counter = new Counter(Settings.InitialValue, Settings.Increment);
     }
 
-    public void Update(IInvalidator invalidator, Model.LiveSplitState state, float width, float height, LayoutMode mode)
+    public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
     {
         try
         {
