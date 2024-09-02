@@ -177,7 +177,7 @@ public partial class CounterComponentSettings : UserControl
             KeyOrButton keyOrButton = x.KeyCode == Keys.Escape ? null : new KeyOrButton(x.KeyCode | x.Modifiers);
 
             // No action for special keys.
-            if (x.KeyCode == Keys.ControlKey || x.KeyCode == Keys.ShiftKey || x.KeyCode == Keys.Menu)
+            if (x.KeyCode is Keys.ControlKey or Keys.ShiftKey or Keys.Menu)
             {
                 return;
             }
@@ -201,7 +201,7 @@ public partial class CounterComponentSettings : UserControl
             KeyOrButton keyOrButton = x.KeyCode == Keys.Escape ? null : new KeyOrButton(x.KeyCode | x.Modifiers);
 
             // No action for normal keys.
-            if (x.KeyCode != Keys.ControlKey && x.KeyCode != Keys.ShiftKey && x.KeyCode != Keys.Menu)
+            if (x.KeyCode is not Keys.ControlKey and not Keys.ShiftKey and not Keys.Menu)
             {
                 return;
             }
