@@ -152,10 +152,7 @@ public class CounterComponent : IComponent
     {
         try
         {
-            if (Settings.Hook != null)
-            {
-                Settings.Hook.Poll();
-            }
+            Settings.Hook?.Poll();
         }
         catch { }
 
