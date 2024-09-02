@@ -163,13 +163,13 @@ public partial class CounterComponentSettings : UserControl
         EventHandlerT<GamepadButton> gamepadButtonPressed = null;
 
         // Remove Input handlers.
-        Action unregisterEvents = () =>
+        void unregisterEvents()
         {
             txtBox.KeyDown -= handlerDown;
             txtBox.KeyUp -= handlerUp;
             txtBox.Leave -= leaveHandler;
             Hook.AnyGamepadButtonPressed -= gamepadButtonPressed;
-        };
+        }
 
         // Handler for KeyDown
         handlerDown = (s, x) =>
