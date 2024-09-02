@@ -68,14 +68,14 @@ public partial class CounterComponentSettings : UserControl
     public Color CounterValueColor { get; set; }
     public bool OverrideTextColor { get; set; }
 
-    public string CounterFontString => String.Format("{0} {1}", CounterFont.FontFamily.Name, CounterFont.Style);
+    public string CounterFontString => string.Format("{0} {1}", CounterFont.FontFamily.Name, CounterFont.Style);
     public Font CounterFont { get; set; }
     public bool OverrideCounterFont { get; set; }
 
     public Color BackgroundColor { get; set; }
     public Color BackgroundColor2 { get; set; }
     public GradientType BackgroundGradient { get; set; }
-    public String GradientString
+    public string GradientString
     {
         get => BackgroundGradient.ToString();
         set => BackgroundGradient = (GradientType)Enum.Parse(typeof(GradientType), value);
