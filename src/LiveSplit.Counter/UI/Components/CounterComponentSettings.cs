@@ -120,7 +120,7 @@ public partial class CounterComponentSettings : UserControl
 
     public XmlNode GetSettings(XmlDocument document)
     {
-        var parent = document.CreateElement("Settings");
+        XmlElement parent = document.CreateElement("Settings");
         CreateSettingsNode(document, parent);
         return parent;
     }
@@ -223,7 +223,7 @@ public partial class CounterComponentSettings : UserControl
         // Handler for gamepad/joystick inputs.
         gamepadButtonPressed = (s, x) =>
         {
-            KeyOrButton key = new KeyOrButton(x);
+            var key = new KeyOrButton(x);
             keySetCallback(key);
             unregisterEvents();
 
@@ -318,7 +318,7 @@ public partial class CounterComponentSettings : UserControl
 
     private void btnFont_Click(object sender, EventArgs e)
     {
-        var dialog = SettingsHelper.GetFontDialog(CounterFont, 11, 26);
+        CustomFontDialog.FontDialog dialog = SettingsHelper.GetFontDialog(CounterFont, 11, 26);
         dialog.FontChanged += (s, ev) => CounterFont = ((CustomFontDialog.FontChangedEventArgs)ev).NewFont;
         dialog.ShowDialog(this);
         lblFont.Text = CounterFontString;

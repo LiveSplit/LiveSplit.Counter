@@ -47,8 +47,8 @@ public class CounterComponent : IComponent
     public float PaddingBottom { get; set; }
     public float PaddingRight => 7f;
 
-    protected SimpleLabel CounterNameLabel = new SimpleLabel();
-    protected SimpleLabel CounterValueLabel = new SimpleLabel();
+    protected SimpleLabel CounterNameLabel = new();
+    protected SimpleLabel CounterValueLabel = new();
 
     protected Font CounterFont { get; set; }
 
@@ -78,7 +78,7 @@ public class CounterComponent : IComponent
         CounterFont = Settings.OverrideCounterFont ? Settings.CounterFont : state.LayoutSettings.TextFont;
 
         // Calculate Height from Font.
-        var textHeight = g.MeasureString("A", CounterFont).Height;
+        float textHeight = g.MeasureString("A", CounterFont).Height;
         VerticalHeight = 1.2f * textHeight;
         MinimumHeight = MinimumHeight;
 
