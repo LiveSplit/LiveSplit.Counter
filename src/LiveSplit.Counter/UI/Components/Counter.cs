@@ -3,7 +3,7 @@
 public class Counter : ICounter
 {
     private int increment = 1;
-    private int initialValue = 0;
+    private readonly int initialValue = 0;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Counter"/> class.

@@ -315,16 +315,17 @@ public partial class CounterComponentSettings : UserControl
         label3.Enabled = btnColor.Enabled = label5.Enabled = btnColor3.Enabled = chkColor.Checked;
     }
 
-    void chkFont_CheckedChanged(object sender, EventArgs e)
+    private void chkFont_CheckedChanged(object sender, EventArgs e)
     {
         label1.Enabled = lblFont.Enabled = btnFont.Enabled = chkFont.Checked;
     }
-    void chkGlobalHotKeys_CheckedChanged(object sender, EventArgs e)
+
+    private void chkGlobalHotKeys_CheckedChanged(object sender, EventArgs e)
     {
         GlobalHotkeysEnabled = chkGlobalHotKeys.Checked;
     }
 
-    void cmbGradientType_SelectedIndexChanged(object sender, EventArgs e)
+    private void cmbGradientType_SelectedIndexChanged(object sender, EventArgs e)
     {
         btnColor1.Visible = cmbGradientType.SelectedItem.ToString() != "Plain";
         btnColor2.DataBindings.Clear();
