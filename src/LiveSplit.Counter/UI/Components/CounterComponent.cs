@@ -10,6 +10,7 @@ using LiveSplit.Model.Input;
 
 namespace LiveSplit.UI.Components;
 
+[GlobalFontConsumer(GlobalFont.TextFont)]
 public class CounterComponent : IComponent
 {
     public CounterComponent(LiveSplitState state)
@@ -146,6 +147,16 @@ public class CounterComponent : IComponent
 
         // Initialise Counter from settings.
         Counter = new Counter(Settings.InitialValue, Settings.Increment);
+    }
+
+    public void MigrateFontOverrides(Options.FontOverrides overrides)
+    {
+        if (Settings.OverrideCounterFont && Settings.CounterFont != null)
+        {
+            overrides.OverrideTextFont = true;
+            overrides.TextFont = (Font)Settings.CounterFont.Clone();
+            Settings.OverrideCounterFont = false;
+        }
     }
 
     public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)

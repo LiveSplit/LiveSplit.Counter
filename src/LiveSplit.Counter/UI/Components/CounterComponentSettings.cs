@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
@@ -18,8 +18,6 @@ public partial class CounterComponentSettings : UserControl
 
         // Set default values.
         GlobalHotkeysEnabled = false;
-        CounterFont = new Font("Segoe UI", 16, FontStyle.Regular, GraphicsUnit.Pixel);
-        OverrideCounterFont = false;
         CounterTextColor = Color.FromArgb(255, 255, 255, 255);
         CounterValueColor = Color.FromArgb(255, 255, 255, 255);
         OverrideTextColor = false;
@@ -40,8 +38,6 @@ public partial class CounterComponentSettings : UserControl
         numInitialValue.DataBindings.Add("Value", this, "InitialValue");
         numIncrement.DataBindings.Add("Value", this, "Increment");
         chkGlobalHotKeys.DataBindings.Add("Checked", this, "GlobalHotkeysEnabled", false, DataSourceUpdateMode.OnPropertyChanged);
-        chkFont.DataBindings.Add("Checked", this, "OverrideCounterFont", false, DataSourceUpdateMode.OnPropertyChanged);
-        lblFont.DataBindings.Add("Text", this, "CounterFontString", false, DataSourceUpdateMode.OnPropertyChanged);
         chkColor.DataBindings.Add("Checked", this, "OverrideTextColor", false, DataSourceUpdateMode.OnPropertyChanged);
         btnColor.DataBindings.Add("BackColor", this, "CounterTextColor", false, DataSourceUpdateMode.OnPropertyChanged);
         btnColor3.DataBindings.Add("BackColor", this, "CounterValueColor", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -51,7 +47,6 @@ public partial class CounterComponentSettings : UserControl
 
         // Assign event handlers.
         cmbGradientType.SelectedIndexChanged += cmbGradientType_SelectedIndexChanged;
-        chkFont.CheckedChanged += chkFont_CheckedChanged;
         chkColor.CheckedChanged += chkColor_CheckedChanged;
         chkGlobalHotKeys.CheckedChanged += chkGlobalHotKeys_CheckedChanged;
 
@@ -68,10 +63,6 @@ public partial class CounterComponentSettings : UserControl
     public Color CounterValueColor { get; set; }
     public bool OverrideTextColor { get; set; }
 
-    public string CounterFontString => string.Format("{0} {1}", CounterFont.FontFamily.Name, CounterFont.Style);
-    public Font CounterFont { get; set; }
-    public bool OverrideCounterFont { get; set; }
-
     public Color BackgroundColor { get; set; }
     public Color BackgroundColor2 { get; set; }
     public GradientType BackgroundGradient { get; set; }
@@ -84,6 +75,10 @@ public partial class CounterComponentSettings : UserControl
     public string CounterText { get; set; }
     public int InitialValue { get; set; }
     public int Increment { get; set; }
+
+    // Legacy font override — read from old configs, not written or exposed in UI
+    public bool OverrideCounterFont { get; set; }
+    public Font CounterFont { get; set; }
 
     public KeyOrButton IncrementKey { get; set; }
     public KeyOrButton DecrementKey { get; set; }
@@ -98,8 +93,8 @@ public partial class CounterComponentSettings : UserControl
         GlobalHotkeysEnabled = SettingsHelper.ParseBool(element["GlobalHotkeysEnabled"]);
         CounterTextColor = SettingsHelper.ParseColor(element["CounterTextColor"]);
         CounterValueColor = SettingsHelper.ParseColor(element["CounterValueColor"]);
-        CounterFont = SettingsHelper.GetFontFromElement(element["CounterFont"]);
         OverrideCounterFont = SettingsHelper.ParseBool(element["OverrideCounterFont"]);
+        CounterFont = SettingsHelper.GetFontFromElement(element["CounterFont"]);
         OverrideTextColor = SettingsHelper.ParseBool(element["OverrideTextColor"]);
         BackgroundColor = SettingsHelper.ParseColor(element["BackgroundColor"]);
         BackgroundColor2 = SettingsHelper.ParseColor(element["BackgroundColor2"]);
@@ -134,9 +129,7 @@ public partial class CounterComponentSettings : UserControl
     {
         return SettingsHelper.CreateSetting(document, parent, "Version", "1.0") ^
         SettingsHelper.CreateSetting(document, parent, "GlobalHotkeysEnabled", GlobalHotkeysEnabled) ^
-        SettingsHelper.CreateSetting(document, parent, "OverrideCounterFont", OverrideCounterFont) ^
         SettingsHelper.CreateSetting(document, parent, "OverrideTextColor", OverrideTextColor) ^
-        SettingsHelper.CreateSetting(document, parent, "CounterFont", CounterFont) ^
         SettingsHelper.CreateSetting(document, parent, "CounterTextColor", CounterTextColor) ^
         SettingsHelper.CreateSetting(document, parent, "CounterValueColor", CounterValueColor) ^
         SettingsHelper.CreateSetting(document, parent, "BackgroundColor", BackgroundColor) ^
@@ -298,7 +291,7 @@ public partial class CounterComponentSettings : UserControl
             int length = str.LastIndexOf(' ');
             if (length != -1)
             {
-                str = str[..length];
+                str = str.Substring(0, length);
             }
         }
 
@@ -308,7 +301,6 @@ public partial class CounterComponentSettings : UserControl
     private void CounterSettings_Load(object sender, EventArgs e)
     {
         chkColor_CheckedChanged(null, null);
-        chkFont_CheckedChanged(null, null);
     }
 
     private void ColorButtonClick(object sender, EventArgs e)
@@ -316,22 +308,9 @@ public partial class CounterComponentSettings : UserControl
         SettingsHelper.ColorButtonClick((Button)sender, this);
     }
 
-    private void btnFont_Click(object sender, EventArgs e)
-    {
-        CustomFontDialog.FontDialog dialog = SettingsHelper.GetFontDialog(CounterFont, 11, 26);
-        dialog.FontChanged += (s, ev) => CounterFont = ((CustomFontDialog.FontChangedEventArgs)ev).NewFont;
-        dialog.ShowDialog(this);
-        lblFont.Text = CounterFontString;
-    }
-
     private void chkColor_CheckedChanged(object sender, EventArgs e)
     {
         label3.Enabled = btnColor.Enabled = label5.Enabled = btnColor3.Enabled = chkColor.Checked;
-    }
-
-    private void chkFont_CheckedChanged(object sender, EventArgs e)
-    {
-        label1.Enabled = lblFont.Enabled = btnFont.Enabled = chkFont.Checked;
     }
 
     private void chkGlobalHotKeys_CheckedChanged(object sender, EventArgs e)
