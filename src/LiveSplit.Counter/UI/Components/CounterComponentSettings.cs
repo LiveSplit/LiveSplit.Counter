@@ -1,10 +1,9 @@
+﻿using LiveSplit.Model.Input;
+using LiveSplit.Options;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
-
-using LiveSplit.Model.Input;
-using LiveSplit.Options;
 
 namespace LiveSplit.UI.Components;
 
@@ -291,7 +290,7 @@ public partial class CounterComponentSettings : UserControl
             int length = str.LastIndexOf(' ');
             if (length != -1)
             {
-                str = str.Substring(0, length);
+                str = str[..length];
             }
         }
 

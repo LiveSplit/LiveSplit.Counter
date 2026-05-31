@@ -1,12 +1,11 @@
-﻿using System;
+﻿using LiveSplit.Model;
+using LiveSplit.Model.Input;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
-
-using LiveSplit.Model;
-using LiveSplit.Model.Input;
 
 namespace LiveSplit.UI.Components;
 
@@ -63,15 +62,10 @@ public class CounterComponent : IComponent
             && Settings.BackgroundColor2.A > 0))
         {
             var gradientBrush = new LinearGradientBrush(
-                        new PointF(0, 0),
-                        Settings.BackgroundGradient == GradientType.Horizontal
-                        ? new PointF(width, 0)
-                        : new PointF(0, height),
-                        Settings.BackgroundColor,
-                        Settings.BackgroundGradient == GradientType.Plain
-                        ? Settings.BackgroundColor
-                        : Settings.BackgroundColor2);
-
+                new PointF(0, 0),
+                Settings.BackgroundGradient == GradientType.Horizontal ? new PointF(width, 0) : new PointF(0, height),
+                Settings.BackgroundColor,
+                Settings.BackgroundGradient == GradientType.Plain ? Settings.BackgroundColor : Settings.BackgroundColor2);
             g.FillRectangle(gradientBrush, 0, 0, width, height);
         }
 
